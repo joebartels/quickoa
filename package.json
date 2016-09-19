@@ -1,0 +1,30 @@
+{
+  "name": "quickoa",
+  "version": "0.1.0",
+  "description": "get koa API + postgres up quickly",
+  "main": "index.js",
+  "scripts": {
+    "test": "node tests/runner.js"
+  },
+  "author": "Joseph Bartels (http://joebartels.me)",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "0.8.7",
+    "bluebird": "3.4.5",
+    "co": "4.6.0",
+    "inflected": "1.1.7",
+    "jsonwebtoken": "7.1.9",
+    "kcors": "2.1.1",
+    "koa": "2.0.0-alpha.7",
+    "koa-bodyparser": "3.2.0",
+    "koa-response-time": "2.0.0",
+    "koa-router": "7.0.1",
+    "pg-monitor": "0.5.11",
+    "pg-promise": "5.3.2"
+  },
+  "devDependencies": {
+    "chai": "3.5.0",
+    "glob": "7.0.6",
+    "mocha": "3.0.2"
+  }
+}
