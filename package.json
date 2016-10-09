@@ -25,6 +25,7 @@
   "devDependencies": {
     "chai": "3.5.0",
     "glob": "7.0.6",
-    "mocha": "3.0.2"
+    "mocha": "3.0.2",
+    "requiring": "0.0.5"
   }
 }

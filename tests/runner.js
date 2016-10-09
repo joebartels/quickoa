@@ -8,17 +8,21 @@ var mocha = new Mocha({
 });
 
 var arg = process.argv[2];
-var root = 'tests/';
+var root = 'tests';
 
 function addFiles(mocha, files) {
-  console.log(files);
-  glob.sync(root + files).forEach(mocha.addFile.bind(mocha));
+  console.log(`testing file paths: ${files}`);
+
+  glob.sync(files).forEach(mocha.addFile.bind(mocha));
 }
 
-addFiles(mocha, '/**/*-test.js');
-
 if (arg === 'all') {
-  addFiles(mocha, '/**/*-slow.js');
+  addFiles(mocha, `${root}/**/*-test.js`);
+  addFiles(mocha, `${root}/**/*-slow.js`);
+} else if (arg) {
+  addFiles(mocha, arg);
+} else {
+  addFiles(mocha, `${root}/**/*-test.js`);
 }
 
 mocha.run(function(failures) {
@@ -26,3 +30,12 @@ mocha.run(function(failures) {
     process.exit(failures);
   });
 });
+
+// TODO:CLEANUP
+// be smart about testing directories via CLI arg. e.g., 
+// npm test tests/transforms
+// => glob.sync(tests/transforms/**/**-test.js)
+// 
+//    Check if directory, and apply the wildcard glob
+//      or
+//    Apply wildcard glob when no file extension exists

@@ -101,3 +101,14 @@ create ecosystem.json file in root:
   }]
 }
 ```
+
+##### Serializers
+```
+// serializers/book.js
+
+const Serializer = require('quickoa/serializer');
+const model = require('../models/book');
+const rootKey = 'book';
+
+module.exports = new Serializer({ rootKey, model });
+```

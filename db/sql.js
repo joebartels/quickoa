@@ -22,6 +22,24 @@ const queries = enumSql(dir, { recursive: true }, file => {
     return new QueryFile(file, options);
 });
 
-// console.log(queries);
 
+/**
+  Exports an object of SQL Queries.
+  Uses naming conventions based on the filepath.
+
+  e.g., with these files in the main working directory:
+
+  __sql/user-places/add.sql__
+  __sql/user-trips/find-my-trips.sql__
+
+  the exported object looks like:
+  ```js
+  {
+    userPlaces: { add },
+    userTrips: { findMyTrips }
+  }
+  ```
+
+  @object
+*/
 module.exports = queries;
