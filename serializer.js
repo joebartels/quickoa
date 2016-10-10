@@ -70,9 +70,12 @@ class Serializer {
     if (Array.isArray(data)) {
       key = this.rootKeyPlural;
       res = data.map(item => this.serializeOne(item, fields));
-    } else {
+    } else if (data && typeof data === 'object') {
       key = this.rootKey;
       res = this.serializeOne(data, fields);
+    } else {
+      key = this.rootKey;
+      res = {}
     }
 
     ret[key] = res;

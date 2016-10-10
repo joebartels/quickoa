@@ -1,4 +1,6 @@
-const Model = require ('../model');
+const requiring = require('requiring').sync;
+const Model     = requiring('model');
+
 const { assert } = require('chai');
 
 describe('model.js', function() {
@@ -29,13 +31,24 @@ describe('model.js', function() {
   describe('#instance', function() {
 
     let catOptions = {
-      name: 'cats',
+      name: 'cat',
       fields: {
         id: {
           primaryKey: true
         }
       }
     };
+
+    it('#name', function() {
+      let options = Object.assign(
+        {}, 
+        catOptions, 
+        { fields: { color: {}, weight: {}, age: {} } }
+      );
+      let cat = new Model(options);
+
+      assert.equal(cat.name, 'cat', 'model.name is correct');
+    });
 
     it('has a generated fieldsList', function() {
       let options = Object.assign(

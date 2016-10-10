@@ -1,12 +1,16 @@
-const {
-  mapObj,
-  camelize
-} = require ('../utils');
+const requiring = require('requiring').sync;
 
+const {
+  camelize
+} = requiring('utils/strings');
+
+const {
+  mapObj
+} = requiring('utils/objects');
 
 const { assert } = require('chai');
 
-describe('utils.js', function() {
+describe('utils/objects.js', function() {
 
   describe('#mapObj', function() {
 

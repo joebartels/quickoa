@@ -11,7 +11,7 @@ module.exports.mapObj = mapObj;
                     excluded from the returned Object.
 */
 function mapObj(obj, fn, ret = {}) {
-  for (let key in obj) {
+  for (const key of Object.keys(obj)) {
     let [ k, v ] = fn(key, obj[key]);
 
     if (typeof k !== 'undefined') {

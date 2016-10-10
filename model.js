@@ -23,8 +23,8 @@ class Model {
       throw new Error('Must provide an Object for options.fields');
     }
 
+    this.name = name;
     this.fields = fields;
-    // this.validators = validators;
     this.fieldsList = generateFieldsList(fields);
     this.primaryKey = findPrimaryKey(fields);
   }

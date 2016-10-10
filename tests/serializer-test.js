@@ -62,6 +62,26 @@ describe('serializer.js', function() {
       }
     });
 
+    describe('instance properties', function() {
+
+      it('rootKey and rootKeyPlural from `{ rootKey }`', function() {
+        let rootKey = 'dog';
+        let serializer = new Serializer({ model, rootKey });
+
+        assert.equal(serializer.rootKey, 'dog', `rootKey`);
+        assert.equal(serializer.rootKeyPlural, 'dogs', `rootKeyPlural`);
+      });
+
+      it('rootKey and rootKeyPlural from `{ model }`', function() {
+        let catModel = new Model({ name: 'cat', fields: {} });
+        let serializer = new Serializer({ model: catModel });
+
+        assert.equal(serializer.rootKey, 'cat', `rootKey from model.name`);
+        assert.equal(serializer.rootKeyPlural, 'cats', `rootKeyPlural from model.name`);
+      });
+
+    });
+
     /**
       - Converts number w/ Type String to Type Number
       - Array of numbers w/ Type Stirng to Type Number
@@ -153,6 +173,18 @@ describe('serializer.js', function() {
 
         assert.deepEqual(data, expected, `serializes single row correctly`);
       });
+
+      it('#serialize - null', function() {
+        let rootKey = 'person';
+        
+        let serializer = new Serializer({ model, rootKey });
+
+        let data = serializer.serialize(null);
+
+        let expected = { person: {} };
+
+        assert.deepEqual(data, expected, `serializes single row correctly`);
+      });      
     });
 
     describe('#serializeAttribute', function() {

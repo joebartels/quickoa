@@ -1,6 +1,6 @@
+const Bluebird = require('bluebird');
 const Serializer = require('./serializer');
 const Validator = require('./validator');
-
 /**
   An Agent is used to communicate with the database from the API.
   An Agent is responsible for creating/updating and reading records from the db.
@@ -69,9 +69,8 @@ class Agent {
     @param {Object} data The data required to make the specific SQL query.
   */
   db(query, data) {
-    this.raw(...arguments)
-    .then(results => this.serialize(results))
-    .catch(error => { error });
+    return this.raw(...arguments)
+    .then(results => this.serialize(results));
   }
 
   /**
@@ -87,26 +86,26 @@ class Agent {
     let query = repo[queryName];
 
     if (typeof query !== 'function') {
-      throw new Error(`No query found for ${queryName}.`);
+      return Bluebird.reject(new Error(`No query found for ${queryName}.`));
     }
 
     return query(data);
   }
 
-  serializer() {
-    this.serializer.serialize(...arguments);
+  serialize() {
+    return this.serializer.serialize(...arguments);
   }
 
   normalize() {
-    this.serializer.normalize(...arguments);
+    return this.serializer.normalize(...arguments);
   }
 
-  deserializer() {
-    this.serializer.deserialize(...arguments);
+  deserialize() {
+    return this.serializer.deserialize(...arguments);
   }
 
   validate() {
-    this.validator.validate(...arguments);
+    return this.validator.validate(...arguments);
   }
 }
 

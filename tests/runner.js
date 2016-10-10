@@ -1,14 +1,21 @@
 'use strict';
 
-var glob  = require('glob');
-var Mocha = require('mocha');
+const glob  = require('glob');
+const Mocha = require('mocha');
 
-var mocha = new Mocha({
-  reporter: 'spec'
-});
+const arg = process.argv[2];
+const grep = process.argv[3];
+const root = 'tests';
 
-var arg = process.argv[2];
-var root = 'tests';
+const mochaOptions = {
+  retport: 'spec'
+};
+
+if (grep) {
+  mochaOptions.grep = grep;
+}
+
+const mocha = new Mocha(mochaOptions);
 
 function addFiles(mocha, files) {
   console.log(`testing file paths: ${files}`);
