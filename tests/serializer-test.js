@@ -3,6 +3,8 @@ const Model       = requiring('model');
 const Serializer  = requiring('serializer');
 const { assert }  = require('chai');
 
+const { attr } = Model;
+
 describe('serializer.js', function() {
 
   describe('#constructing', function() {
@@ -37,28 +39,13 @@ describe('serializer.js', function() {
     let model = new Model({
       name: 'person',
       fields: {
-        id: {
-          primaryKey: true,
-          dataType: 'bigint'
-        },
-        name: {
-          dataType: 'string'
-        },
-        age: {
-          dataType: 'smallint'
-        },
-        married: {
-          dataType: 'boolean'
-        },
-        pet_ids: {
-          dataType: 'array:int'
-        },
-        pet_names: {
-          dataType: 'array:string'
-        },
-        born_on: {
-          dataType: 'date'
-        }
+        id: attr('bigint', { primaryKey: true }),
+        name: attr('string'),
+        age: attr('smallint'),
+        married: attr('boolean'),
+        pet_ids: attr('array:int'),
+        pet_names: attr('array:string'),
+        born_on: attr('date'),
       }
     });
 
@@ -263,7 +250,7 @@ describe('serializer.js', function() {
 
         assert.deepEqual(serialize(
           ['1', 2, null,  undefined,  true, false, '0']),
-          [1,   2, 0,     null,       1,    0,      0],
+          [1,   2, null,  null,       1,    0,      0],
           `bigint: serializes array of values as expected`
         );
       });
@@ -273,7 +260,7 @@ describe('serializer.js', function() {
 
         assert.deepEqual(serialize(
           ['1', 2, null,  undefined,  true, false, '0']),
-          [1,   2, 0,     null,       1,    0,      0],
+          [1,   2, null,  null,       1,    0,      0],
           `smallint: serializes array of values as expected`
         );
       });
@@ -283,7 +270,7 @@ describe('serializer.js', function() {
 
         assert.deepEqual(serialize(
           ['1', 2, null,  undefined,  true, false, '0']),
-          [1,   2, 0,     null,       1,    0,      0],
+          [1,   2, null,  null,       1,    0,      0],
           `int: serializes array of values as expected`
         );
       });

@@ -43,3 +43,4 @@ const queries = enumSql(dir, { recursive: true }, file => {
   @object
 */
 module.exports = queries;
+

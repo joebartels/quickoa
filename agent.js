@@ -68,9 +68,13 @@ class Agent {
     @param {String} queryName The SQL query to execute
     @param {Object} data The data required to make the specific SQL query.
   */
-  db(query, data) {
+  query(query, data) {
     return this.raw(...arguments)
     .then(results => this.serialize(results));
+  }
+
+  upsert(query, data) {
+    // normalize, validate, deserialize... ? --- check order!
   }
 
   /**

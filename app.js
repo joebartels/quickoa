@@ -5,7 +5,6 @@ const cors      = require('kcors');
 const bluebird  = require('bluebird');
 const responseT = require('koa-response-time');
 
-// connect to postgres
 const { db } = require('./db/pg');
 
 const {
@@ -32,8 +31,6 @@ class App extends Koa {
       },
       credentials: true,
     }));
-
-    // don't start app unless can establish db connection.
 
     db.connect()
     .then(con => {

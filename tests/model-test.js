@@ -3,6 +3,8 @@ const Model     = requiring('model');
 
 const { assert } = require('chai');
 
+const attr = Model.attr;
+
 describe('model.js', function() {
 
   describe('#constructing', function() {
@@ -28,6 +30,40 @@ describe('model.js', function() {
     });
   });
 
+  describe('class methods', function() {
+
+    it('#attr', function() {
+      let options = {
+        name: 'shoe',
+        fields: {
+          id: attr('int', { primaryKey: true }),
+          brand: attr('string'),
+          size: attr('number', { defaultValue: 10, min: 3, max: 14 }),
+        }
+      };
+
+      let expect = {
+        id: {
+          dataType: 'int',
+          primaryKey: true
+        },
+        brand: {
+          dataType: 'string'
+        },
+        size: {
+          dataType: 'number',
+          defaultValue: 10,
+          min: 3,
+          max: 14
+        }
+      };
+
+      let model = new Model(options);
+
+      assert.deepEqual(model.fields, expect, 'attr() generates ');
+    });
+  });
+
   describe('#instance', function() {
 
     let catOptions = {
@@ -41,7 +77,7 @@ describe('model.js', function() {
 
     it('#name', function() {
       let options = Object.assign(
-        {}, 
+        {},
         catOptions, 
         { fields: { color: {}, weight: {}, age: {} } }
       );

@@ -3,6 +3,10 @@ const Record = require('./record.js');
 const { mapObj } = require('./utils/objects');
 const { pluralize, underscore } = require('./utils/strings');
 
+/**
+  @class Model
+  @param {Object} options { name, fields }
+*/
 class Model {
   constructor(options) {
     if (typeof options !== 'object') {
@@ -11,12 +15,11 @@ class Model {
 
     let {
       name,
-      // validators,
       fields
     } = options;
 
     if (typeof name !== 'string') {
-      throw new Error('Must provide a String for options.name');
+      throw new TypeError('Must provide a String for options.name');
     }
 
     if (typeof fields !== 'object') {
@@ -66,6 +69,16 @@ class Model {
     let recordValues = mapObj(this.fields, fn);
 
     return new Record(this, recordValues);
+  }
+
+  static attr(dataType, options = {}) {
+    if (typeof dataType !== 'string') {
+      throw new TypeError(`dataType must be a string.`);
+    }
+    
+    options.dataType = dataType;
+
+    return options;
   }
 }
 

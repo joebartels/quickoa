@@ -111,8 +111,8 @@ describe('agent.js', function() {
 
       let agent = new Agent({ serializer, validator, repo });
 
-      return agent.db('getGoat', 1)
-      .then(result => assert.deepEqual(result, expect), `agent.db('doStuff')`);
+      return agent.query('getGoat', 1)
+      .then(result => assert.deepEqual(result, expect), `agent.query('doStuff')`);
     });
 
     /**
@@ -139,7 +139,7 @@ describe('agent.js', function() {
 
       let agent = new Agent({ serializer, validator, repo });
 
-      return agent.db('getGoat', 1)
+      return agent.query('getGoat', 1)
       .catch(result => {
         assert.equal(result, error, `query method reject`);
       });
@@ -161,7 +161,7 @@ describe('agent.js', function() {
 
       let agent = new Agent({ serializer, validator, repo });
 
-      return agent.db('getGoat', 1)
+      return agent.query('getGoat', 1)
       .catch(result => {
         assert.ok(result instanceof Error, 'Error is caught.');
         assert.equal(result.message, error.message, 'correct error message');
@@ -198,7 +198,7 @@ describe('agent.js', function() {
 
       let agent = new Agent({ serializer, validator, repo });
 
-      return agent.db('getGoat', 1)
+      return agent.query('getGoat', 1)
       .then(result => {
         assert.deepEqual(result, expect, 'raw response is expected');
       });
@@ -217,7 +217,7 @@ describe('agent.js', function() {
 
       let agent = new Agent({ serializer, validator, repo });
 
-      return agent.db('getGoat', 1)
+      return agent.query('getGoat', 1)
       .catch(result => {
         assert.ok(result instanceof Error, 'Error is caught.');
         assert.equal(result.message, error.message, 'correct error message');

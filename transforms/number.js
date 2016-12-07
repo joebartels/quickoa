@@ -29,6 +29,7 @@ module.exports = {
 
 function isNumber(value) {
   return value === value &&
+          value !== null &&
           value !== Infinity &&
           value !== -Infinity && 
           !isNaN(value);
