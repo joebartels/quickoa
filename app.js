@@ -5,7 +5,7 @@ const cors      = require('kcors');
 const bluebird  = require('bluebird');
 const responseT = require('koa-response-time');
 
-const { db } = require('./db/pg');
+const { db } = require('./db/repos');
 
 const {
   PORT

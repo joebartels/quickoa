@@ -30,7 +30,6 @@ const repos = require(repoDir);
   
   A repo should export a single function that accepts (rep, pgp)
 
-
   @file db/pg.js
 */
 
@@ -75,7 +74,7 @@ const pgConOptions = {
 const diag = require('./pg-diagnostics');
 diag.init(options);
 
-// database instance:
+// database instance with repos attached:
 const db = pgp(pgConOptions);
 
 // pgp.pg.defaults.poolSize = 20;
