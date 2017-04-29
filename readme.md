@@ -96,15 +96,15 @@ const authenticate = require('../../middlewares/authenticate');
 
 module.exports.findComments = [
   authenticate,
-  co.wrap(findCommentsByPost)
+  findCommentsById
 ];
 
 module.exports.addComment = [
   authenticate,
-  co.wrap(addCommentToPost)
+  addCommentToPost
 ];
 
-function findCommentsById *() {
+async function findCommentsById *() {
   
 }
 
